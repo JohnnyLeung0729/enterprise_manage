@@ -1,13 +1,13 @@
 # coding: utf-8
 from flask_sqlalchemy import SQLAlchemy
 
-from ext import db
+from ext import db, get_uuid
 
 
 class Taxukey(db.Model):
     __tablename__ = 'taxukey'
 
-    id = db.Column(db.String(32), primary_key=True, unique=True, info='ID')
+    id = db.Column(db.String(32), primary_key=True, default=get_uuid, unique=True, info='ID')
     keytype = db.Column(db.Integer, nullable=False, info='税控Ukey类型')
     keyno = db.Column(db.String(32), info='税控Ukey号码')
     Enterprise_id = db.Column(db.ForeignKey('enterprise.id'), nullable=False, index=True)
